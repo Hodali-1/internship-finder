@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternPath - Find your intership.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/css2?...">  
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="wrap">
+            <p class="brand">InternPath</p>
+            <h1>Your first real work experience starts here. </h1>
+            <p class="sub"> Search live internships listings by role and place save the ones you like and apply when you feel ready.</p>
+            <form class="search" id="searchForm" role="search">
+                <input id ="q" type="search" placeholder="role or skills, e.g. marketing" aria-label="role or skills">
+                <input id="where" type="search" placeholder="city,e.g Kigali" aria-label="location"> 
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="wrap layout">
+        <aside class="filters" aria-label="filters">
+            <label>Field
+                <select id="field"><option value=""> All fields</option></select>  
+            </label>
+            <label>Sort by
+                <select id="sort">
+                    <option value="newest">Newest</option>
+                    <option value="salary">Highest Salary</option>
+                </select>
+            </label>
+            <label class="check"><input type="checkbox" id="paid"> Salary listed only</label>
+            <label class="check"><input type="checkbox" id="savedOnly"> saved Only(<span id="savedCount">0</span>)</label>
+            <button type="button" id="reset" class="ghost">Clear filters</button>
+        </aside>
+        <section aria-live="polite">
+            <p id="notice" class="notice" hidden></p>
+            <p id="count" class="count"></p>
+            <ul id="list" class="list"></ul>
+            <p id="empty" class="empty" hidden>No internships found.</p>
+        </section>
+    </main>
+
+<footer class="foot">
+    <div class="wrap">
+        <p>
+            <strong>InternPath</strong> · Internship Listings powered by
+            <a href="https://adzuna.com" target="_blank" rel="noopener">Jobs by Adzuna</a>
+        </p>
+        <p>
+            <a href="https://developer.adzuna.com/" target="_blank" rel="noopener"> adzuna API Documentation</a>  · 
+            <a href="https://github.com/Hodali-1" target="_blank" rel="noopener"> Developer of InternPath</a>
+        </p>
+    </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
