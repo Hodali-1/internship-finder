@@ -36,28 +36,20 @@ function normalize(j){
 
 //Fetching data
  async function fetchInternships(what, where) {
-    if(typeof APP_ID ==="undefined" || APP_ID ==="YOUR_APP_ID"){
-        throw new Error("add your Adzuna keys to config.js first.")
-    }
-    const params = new URLSearchParams({
-        app_id: APP_ID,app_key: APP_KEY, results_per_page: 30,
-        what: ("internship " +what).trim(), sort_by: "date"
-    });
-    if (where) params.set("where", where);
+    const params = new URLSearchParams({ what, where });
 
     let res;
-    try{
-        res = await fetch(`https://api.adzuna.com/v1/api/jobs/${COUNTRY}/search/1?${params}`);
+    try {
+        res = await fetch(`/api/internships?${params}`);
     } catch (e) {
-        throw new Error ("Couldn't reach the job service. Check your internet connection.");
+        throw new Error("The server isn't responding. Please try again in a moment.");
     }
-    if (res.status === 401 || res.status === 403) throw new Error("The Adzuna keys were rejected.check config.js.");
-    if (res.status === 429) throw  new Error ("Too  many searches right now. Please wait a minute.");
-    if (!res.ok) throw new Error (`The Job service returned an Error(${res.status}).`);
 
-    let data;
-    try {data = await res.json();} catch (e) { throw new Error("The job service sent an invalid response.");}
-    if (!data || !Array.isArray(data.results)) throw new Error("The job service sent an unexpected response.");
+    let data = null;
+    try { data = await res.json(); } catch(e){}
+
+    if (!res.ok) throw new Error(data?.error ||`The server returned an error (${res.status}). `);
+    if (!data || !Array.isArray(data.results)) throw new Error("The server sent an unexpected response.");
     return data.results;
  }
 
